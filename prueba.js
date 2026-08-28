@@ -1,13 +1,8 @@
-/*var http = require("http");
-http.createServer(function (request, response) {
-    response.writeHead(200, { "Content-Type": "text/plain" });
-    response.end("Hola Mundo!\n");
-  }).listen(8080);
-console.log("Servidor en la url http://127.0.0.1:8080/");*/
+const mongoose = require('mongoose')
 const users = require("./routes/users")
 const express = require('express'); 
 const app = express();
-const port = 8081;
+const port = process.env.PORT || '8081';
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
@@ -19,6 +14,15 @@ app.get(/.*test$/, function(req, res) {
 app.use("/static", express.static('public'))
 app.use("/users", users);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+const uri = process.env.MONGO;
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+    console.log('Connection success');
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`)
+    })
+  }).catch(error => {
+    console.error('Connection fail', error);
+  });
