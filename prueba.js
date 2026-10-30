@@ -11,6 +11,9 @@ app.get('/', (req, res) => {
 app.get(/.*test$/, function(req, res) {
   res.send('<h1>Entraste usando el patron test!</h1>');
 });
+app.get(/.*gato$/, function(req, res) {
+  res.send('<h1>Entraste usando el patron gato!</h1>');
+});
 app.use("/static", express.static('public'))
 app.use("/users", users);
 
@@ -26,3 +29,5 @@ mongoose.connect(uri, {
   }).catch(error => {
     console.error('Connection fail', error);
   });
+
+  export default app;
