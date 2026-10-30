@@ -4,6 +4,7 @@
   "description": "Proyecto de ejemplo usando NodeJS",
   "main": "prueba.js",
   "scripts": {
+    "build": "cd client && npm install && npm run build",
     "start": "node node_modules/nodemon/bin/nodemon --env-file=.env prueba.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
