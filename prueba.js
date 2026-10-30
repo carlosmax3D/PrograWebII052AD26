@@ -15,8 +15,10 @@ app.get(/.*gato$/, function(req, res) {
   res.send('<h1>Entraste usando el patron gato!</h1>');
 });
 app.use("/static", express.static('public'))
-app.use("/users", users);
-
+app.use("/api/users", users);
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "public/index.html"));
+})
 const uri = process.env.MONGO;
 mongoose.connect(uri, {
   useNewUrlParser: true,
