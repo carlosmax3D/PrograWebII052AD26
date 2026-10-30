@@ -17,6 +17,7 @@ app.get(/.*gato$/, function(req, res) {
 });
 app.use("/static", express.static('public'))
 app.use("/api/users", users);
+app.use(express.static(path.join(__dirname, "client/dist")));
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "client/dist/index.html"));
 })
